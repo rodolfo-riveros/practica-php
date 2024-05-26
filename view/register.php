@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Login</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Register</title>
 </head>
 <body>
     <div class="w-screen h-screen flex items-center justify-center bg-slate-300">
-        <form action="" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-[30%]">
+        <form method="POST" action="/controller/register.php" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-[30%]">
             <!-- texto -->
             <div class="pb-8 text-center">
                 <h1 class="text-xl font-bold text-blue-500">
-                    Bienvenido al Login
+                    Registrese
                 </h1>
             </div>
             <!-- icono -->
@@ -32,12 +33,39 @@
                 <input type="password" name="password" id="password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
             </div>
             <div class="flex items-center justify-between">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    Iniciar
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
+                    Registrarse
                 </button>
-                <a href="#" class="text-gray-500 hover:text-blue-500">¿Aún no tiene una cuenta?</a>
+                <a href="/view/login.html" class="text-gray-500 hover:text-blue-500">¿Ya tiene una cuenta?</a>
             </div>
         </form>
     </div>
+
+    <!-- Mostrar alertas de SweetAlert -->
+    <?php
+    session_start();
+    if (isset($_SESSION['success'])) {
+        echo "<script>
+            Swal.fire({
+                icon: 'success',
+                title: '¡Éxito!',
+                text: '" . addslashes($_SESSION['success']) . "'
+            });
+        </script>";
+        unset($_SESSION['success']);
+    }
+
+    if (isset($_SESSION['error'])) {
+        echo "<script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: '" . addslashes($_SESSION['error']) . "'
+            })
+        </script>";
+        unset($_SESSION['error']);
+    }
+    ?>
 </body>
 </html>
+
