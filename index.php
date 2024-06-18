@@ -1,4 +1,4 @@
 <?php 
 //redireccionar a la vista de login
-header ('Location: /view/login.html');
+header ('Location: /view/login.php');
 ?>
